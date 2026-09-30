@@ -11,7 +11,7 @@ class NodoArbol:
         self.altura = 0
 
 
-# ---------------------------------------------------------------- criterio
+
 def criterio(dato, campo=None):
     """Devuelve el valor por el cual se compara: un atributo del registro
     (si `campo` es atributo de la clase) o el dato tal cual."""
@@ -23,7 +23,7 @@ def criterio(dato, campo=None):
 
 
 def normalizar(valor):
-    """Para cadenas: minúsculas y sin tildes. Otros tipos quedan igual."""
+    """Para cadenas: minusculas y sin tildes. Otros tipos quedan igual."""
     if isinstance(valor, str):
         texto = unicodedata.normalize('NFD', valor)
         texto = ''.join(c for c in texto if unicodedata.category(c) != 'Mn')
@@ -35,7 +35,7 @@ def _clave(dato, campo=None):
     return normalizar(criterio(dato, campo))
 
 
-# ------------------------------------------------------------------ alturas
+
 def altura(raiz):
     return -1 if raiz is None else raiz.altura
 
@@ -45,7 +45,7 @@ def actualizar_altura(raiz):
         raiz.altura = max(altura(raiz.izq), altura(raiz.der)) + 1
 
 
-# --------------------------------------------------------------- rotaciones
+
 def rotar_simple(raiz, control):
     """control True: rotación a la derecha; False: a la izquierda."""
     if control:
@@ -88,7 +88,7 @@ def balancear(raiz):
     return raiz
 
 
-# ---------------------------------------------------------------- operaciones
+
 def arbol_vacio(raiz):
     return raiz is None
 
@@ -104,8 +104,8 @@ def insertar_nodo(raiz, dato, campo=None):
 
 
 def reemplazar(raiz):
-    """Busca el mayor nodo del subárbol (el que reemplaza al eliminado)
-    y lo quita de su lugar. Devuelve (subárbol, nodo_reemplazo)."""
+    """Busca el mayor nodo del subarbol (el que reemplaza al eliminado)
+    y lo quita de su lugar. Devuelve (subarbol, nodo_reemplazo)."""
     if raiz.der is None:
         return raiz.izq, raiz
     raiz.der, aux = reemplazar(raiz.der)
@@ -113,7 +113,7 @@ def reemplazar(raiz):
 
 
 def eliminar_nodo(raiz, clave, campo=None):
-    """Devuelve (raíz, valor_eliminado). valor_eliminado es None si no estaba."""
+    """Devuelve (raiz, valor_eliminado). valor_eliminado es None si no estaba."""
     valor = None
     if raiz is not None:
         k = normalizar(clave)
@@ -150,7 +150,7 @@ def buscar_por_proximidad(raiz, cadena, campo=None):
     return [d for d in iterar_inorden(raiz) if k in str(_clave(d, campo))]
 
 
-# ---------------------------------------------------------------- recorridos
+
 def iterar_inorden(raiz):
     if raiz is not None:
         yield from iterar_inorden(raiz.izq)
@@ -194,7 +194,7 @@ def postorden(raiz):
 
 
 def por_nivel(raiz):
-    """Barrido por nivel usando una cola (arribo/atención)."""
+    """Barrido por nivel usando una cola (arribo/atencion)."""
     cola = deque()
     if raiz is not None:
         cola.append((raiz, 1))
@@ -230,46 +230,46 @@ class Criatura:
                 f" | {self.descripcion}")
 
 
-# (nombre, derrotado por, descripción breve)
+
 DATOS = [
     ('Ceto', None, 'Diosa marina, madre de monstruos marinos.'),
-    ('Tifón', 'Zeus', 'Gigante monstruoso, padre de muchos monstruos.'),
+    ('Tifon', 'Zeus', 'Gigante monstruoso, padre de muchos monstruos.'),
     ('Equidna', 'Argos Panoptes', 'Mitad mujer, mitad serpiente; madre de monstruos.'),
     ('Dino', None, 'Una de las Grayas, hermana de Pefredo y Enio.'),
-    ('Pefredo', None, 'Una de las Grayas; compartía un ojo y un diente.'),
+    ('Pefredo', None, 'Una de las Grayas; compartia un ojo y un diente.'),
     ('Enio', None, 'Una de las Grayas.'),
     ('Escila', None, 'Monstruo marino de seis cabezas.'),
-    ('Caribdis', None, 'Remolino monstruoso que engullía barcos.'),
-    ('Euríale', None, 'Una de las Gorgonas, hermana de Medusa.'),
+    ('Caribdis', None, 'Remolino monstruoso que engullia barcos.'),
+    ('Euriale', None, 'Una de las Gorgonas, hermana de Medusa.'),
     ('Esteno', None, 'Una de las Gorgonas.'),
-    ('Medusa', 'Perseo', 'Gorgona cuya mirada convertía en piedra.'),
-    ('Ladón', 'Heracles', 'Dragón guardián de las manzanas de oro de las Hespérides.'),
-    ('Águila del Cáucaso', None, 'Águila que devoraba el hígado de Prometeo.'),
-    ('Quimera', 'Belerofonte', 'León con cabeza de cabra y cola de serpiente.'),
-    ('Hidra de Lerna', 'Heracles', 'Serpiente acuática de varias cabezas regenerables.'),
-    ('León de Nemea', 'Heracles', 'León de piel invulnerable.'),
-    ('Esfinge', 'Edipo', 'Criatura alada con cuerpo de león que planteaba enigmas.'),
-    ('Dragón de la Cólquida', None, 'Dragón que guardaba el vellocino de oro.'),
-    ('Cerbero', None, 'Perro de tres cabezas guardián del Hades.'),
-    ('Cerda de Cromión', 'Teseo', 'Enorme cerda que asolaba la región de Cromión.'),
-    ('Ortro', 'Heracles', 'Perro de dos cabezas, guardián del ganado de Gerión.'),
+    ('Medusa', 'Perseo', 'Gorgona cuya mirada convertia en piedra.'),
+    ('Ladon', 'Heracles', 'Dragon guardian de las manzanas de oro de las Hesperides.'),
+    ('Aguila del Caucaso', None, 'Aguila que devoraba el higado de Prometeo.'),
+    ('Quimera', 'Belerofonte', 'Leon con cabeza de cabra y cola de serpiente.'),
+    ('Hidra de Lerna', 'Heracles', 'Serpiente acuatica de varias cabezas regenerables.'),
+    ('Leon de Nemea', 'Heracles', 'Leon de piel invulnerable.'),
+    ('Esfinge', 'Edipo', 'Criatura alada con cuerpo de leon que planteaba enigmas.'),
+    ('Dragon de la Colquida', None, 'Dragon que guardaba el vellocino de oro.'),
+    ('Cerbero', None, 'Perro de tres cabezas guardian del Hades.'),
+    ('Cerda de Cromion', 'Teseo', 'Enorme cerda que asolaba la region de Cromion.'),
+    ('Ortro', 'Heracles', 'Perro de dos cabezas, guardian del ganado de Gerion.'),
     ('Toro de Creta', 'Teseo', 'Toro salvaje que asolaba la isla de Creta.'),
-    ('Jabalí de Calidón', 'Atalanta', 'Jabalí enviado por Artemisa a Calidón.'),
+    ('Jabali de Calidon', 'Atalanta', 'Jabali enviado por Artemisa a Calidon.'),
     ('Carcinos', None, 'Cangrejo gigante aliado de la Hidra.'),
-    ('Gerión', 'Heracles', 'Gigante de tres cuerpos, dueño de un rebaño.'),
+    ('Gerion', 'Heracles', 'Gigante de tres cuerpos, dueño de un rebaño.'),
     ('Cloto', None, 'Moira que hilaba el hilo de la vida.'),
-    ('Láquesis', None, 'Moira que medía el hilo de la vida.'),
-    ('Átropos', None, 'Moira que cortaba el hilo de la vida.'),
+    ('Laquesis', None, 'Moira que media el hilo de la vida.'),
+    ('Atropos', None, 'Moira que cortaba el hilo de la vida.'),
     ('Minotauro de Creta', 'Teseo', 'Hombre con cabeza de toro, encerrado en el laberinto.'),
-    ('Harpías', None, 'Mitad mujer, mitad ave; robaban la comida.'),
+    ('Harpias', None, 'Mitad mujer, mitad ave; robaban la comida.'),
     ('Argos Panoptes', 'Hermes', 'Gigante de cien ojos.'),
-    ('Aves del Estínfalo', None, 'Aves de plumas metálicas que asolaban un lago.'),
-    ('Talos', 'Medea', 'Autómata de bronce guardián de Creta.'),
-    ('Sirenas', None, 'Seres que atraían a los marineros con su canto.'),
-    ('Pitón', 'Apolo', 'Serpiente gigante guardiana del oráculo de Delfos.'),
+    ('Aves del Estinfalo', None, 'Aves de plumas metalicas que asolaban un lago.'),
+    ('Talos', 'Medea', 'Automata de bronce guardian de Creta.'),
+    ('Sirenas', None, 'Seres que atraian a los marineros con su canto.'),
+    ('Piton', 'Apolo', 'Serpiente gigante guardiana del oraculo de Delfos.'),
     ('Cierva de Cerinea', None, 'Cierva de cuernos de oro consagrada a Artemisa.'),
     ('Basilisco', None, 'Serpiente cuya mirada y aliento eran mortales.'),
-    ('Jabalí de Erimanto', None, 'Jabalí gigante del monte Erimanto.'),
+    ('Jabali de Erimanto', None, 'Jabali gigante del monte Erimanto.'),
 ]
 
 
@@ -282,17 +282,17 @@ def main():
     for nombre, heroe, desc in DATOS:
         raiz = insertar_nodo(raiz, Criatura(nombre, heroe, desc), 'nombre')
 
-    titulo("a) Listado inorden de criaturas y quién las derrotó")
+    titulo("a) Listado inorden de criaturas y quien las derroto")
     for c in iterar_inorden(raiz):
         print(f"{c.nombre:<24} -> {c.derrotado_por or '-'}")
 
-    titulo("b) Cada criatura tiene su descripción (campo 'descripcion')")
-    print("Cargada en la creación; ejemplo:", buscar(raiz, 'Hidra de Lerna', 'nombre').info.descripcion)
+    titulo("b) Cada criatura tiene su descripcion (campo 'descripcion')")
+    print("Cargada en la creacion; ejemplo:", buscar(raiz, 'Hidra de Lerna', 'nombre').info.descripcion)
 
-    titulo("c) Información de Talos")
+    titulo("c) Informacion de Talos")
     print(buscar(raiz, 'Talos', 'nombre').info)
 
-    titulo("d) Los 3 héroes/dioses que derrotaron más criaturas")
+    titulo("d) Los 3 heroes/dioses que derrotaron mas criaturas")
     cuenta = {}
     for c in iterar_inorden(raiz):
         if c.derrotado_por:
@@ -303,8 +303,8 @@ def main():
     umbral = ranking[2][1]
     empatados = [h for h, n in ranking[3:] if n == umbral]
     if empatados:
-        print(f"(Nota: el tercer puesto está empatado con {umbral} criatura; "
-              f"también: {', '.join(empatados)})")
+        print(f"(Nota: el tercer puesto esta empatado con {umbral} criatura; "
+              f"tambien: {', '.join(empatados)})")
 
     titulo("e) Criaturas derrotadas por Heracles")
     for c in iterar_inorden(raiz):
@@ -319,12 +319,12 @@ def main():
     titulo("g) Campo 'capturada' agregado a cada nodo (inicia en None)")
     print("Ejemplo:", buscar(raiz, 'Cerbero', 'nombre').info.capturada)
 
-    titulo("h) Heracles atrapó a Cerbero, Toro de Creta, Cierva de Cerinea y Jabalí de Erimanto")
-    for nombre in ('Cerbero', 'Toro de Creta', 'Cierva de Cerinea', 'Jabalí de Erimanto'):
+    titulo("h) Heracles atrapo a Cerbero, Toro de Creta, Cierva de Cerinea y Jabali de Erimanto")
+    for nombre in ('Cerbero', 'Toro de Creta', 'Cierva de Cerinea', 'Jabali de Erimanto'):
         buscar(raiz, nombre, 'nombre').info.capturada = 'Heracles'
         print(f"{nombre}: capturada por Heracles")
 
-    titulo("i) Búsqueda por coincidencia (ejemplo: 'cer')")
+    titulo("i) Busqueda por coincidencia (ejemplo: 'cer')")
     for c in buscar_por_proximidad(raiz, 'cer', 'nombre'):
         print(c.nombre)
 
@@ -333,18 +333,18 @@ def main():
         raiz, quitado = eliminar_nodo(raiz, nombre, 'nombre')
         print("Eliminada:" if quitado else "No estaba:", nombre)
 
-    titulo("k) Aves del Estínfalo: Heracles derrotó a varias")
-    aves = buscar(raiz, 'Aves del Estínfalo', 'nombre').info
+    titulo("k) Aves del Estinfalo: Heracles derroto a varias")
+    aves = buscar(raiz, 'Aves del Estinfalo', 'nombre').info
     aves.derrotado_por = 'Heracles'
-    aves.descripcion += ' Heracles derrotó a varias.'
+    aves.descripcion += ' Heracles derroto a varias.'
     print(aves)
 
-    titulo("l) Renombrar Ladón por Dragón Ladón")
+    titulo("l) Renombrar Ladon por Dragon Ladon")
     # cambia el campo clave: se quita, se modifica y se vuelve a insertar
-    raiz, ladon = eliminar_nodo(raiz, 'Ladón', 'nombre')
-    ladon.nombre = 'Dragón Ladón'
+    raiz, ladon = eliminar_nodo(raiz, 'Ladon', 'nombre')
+    ladon.nombre = 'Dragon Ladon'
     raiz = insertar_nodo(raiz, ladon, 'nombre')
-    print(buscar(raiz, 'Dragón Ladón', 'nombre').info)
+    print(buscar(raiz, 'Dragon Ladon', 'nombre').info)
 
     titulo("m) Listado por nivel")
     por_nivel(raiz)
