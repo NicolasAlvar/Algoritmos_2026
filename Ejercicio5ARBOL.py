@@ -118,7 +118,7 @@ class Personaje:
         self.es_heroe = es_heroe 
 
     def __str__(self):
-        return f"{self.nombre} ({'héroe' if self.es_heroe else 'villano'})"
+        return f"{self.nombre} ({'heroe' if self.es_heroe else 'villano'})"
 
 
 HEROES = ['Iron Man', 'Capitan America', 'Thor', 'Hulk', 'Black Widow',
@@ -142,20 +142,20 @@ def main():
     for n in VILLANOS:
         raiz = insertar_nodo(raiz, Personaje(n, False), 'nombre')
 
-    titulo("b) Villanos ordenados alfabéticamente")
+    titulo("b) Villanos ordenados alfabeticamente")
     for p in iterar_inorden(raiz):
         if not p.es_heroe:
             print(p.nombre)
 
-    titulo("c) Superhéroes que empiezan con C")
+    titulo("c) Superheroes que empiezan con C")
     for p in iterar_inorden(raiz):
         if p.es_heroe and p.nombre.upper().startswith('C'):
             print(p.nombre)
 
-    titulo("d) Cantidad de superhéroes en el árbol")
+    titulo("d) Cantidad de superheroes en el arbol")
     print(sum(1 for p in iterar_inorden(raiz) if p.es_heroe))
 
-    titulo("e) Corregir Doctor Strange (búsqueda por proximidad)")
+    titulo("e) Corregir Doctor Strange (busqueda por proximidad)")
     encontrados = buscar_por_proximidad(raiz, 'strange', 'nombre')
     print("Coincidencias:", [p.nombre for p in encontrados])
     for p in encontrados:
@@ -165,12 +165,12 @@ def main():
         raiz = insertar_nodo(raiz, mal, 'nombre')
         print("Corregido:", mal)
 
-    titulo("f) Superhéroes ordenados de manera descendente")
+    titulo("f) Superheroes ordenados de manera descendente")
     for p in iterar_inorden_desc(raiz):
         if p.es_heroe:
             print(p.nombre)
 
-    titulo("g) Bosque: un árbol de superhéroes y otro de villanos")
+    titulo("g) Bosque: un arbol de superheroes y otro de villanos")
     arbol_heroes = None
     arbol_villanos = None
     for p in iterar_inorden(raiz):
@@ -179,12 +179,12 @@ def main():
         else:
             arbol_villanos = insertar_nodo(arbol_villanos, p, 'nombre')
 
-    print("\nI) Cantidad de nodos por árbol")
-    print("Superhéroes:", contar_nodos(arbol_heroes))
+    print("\nI) Cantidad de nodos por arbol")
+    print("Superheroes:", contar_nodos(arbol_heroes))
     print("Villanos:   ", contar_nodos(arbol_villanos))
 
-    print("\nII) Barrido ordenado alfabéticamente")
-    print("Superhéroes:", ', '.join(p.nombre for p in iterar_inorden(arbol_heroes)))
+    print("\nII) Barrido ordenado alfabeticamente")
+    print("Superheroes:", ', '.join(p.nombre for p in iterar_inorden(arbol_heroes)))
     print("Villanos:   ", ', '.join(p.nombre for p in iterar_inorden(arbol_villanos)))
 
 
